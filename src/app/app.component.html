@@ -1,3 +1,54 @@
-<h1>
-  {{title}}
-</h1>
+<md-sidenav-container
+  infinite-scroll
+  [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="300"
+  (scrolled)="loadMessages()"
+  role="presentation"
+  class="container">
+  <md-sidenav #sidenav class="sidenav" role="complementary">
+    This is some place holder content.
+  </md-sidenav>
+
+  <md-toolbar class="nav" stick color="primary" role="banner">
+    <button
+      aria-labelby="menuIcon"
+      aria-expanded="false"
+      aria-haspopup="true"
+      role="button"
+      rel="toggle"
+      class="nav-button"
+      md-button
+      (click)="sidenav.open()">
+      <md-icon id="menuIcon" class="nav-icon">menu</md-icon>
+    </button>
+
+    <span class="nav-title">Messages</span>
+  </md-toolbar>
+
+  <main class="content" role="main">
+    <div class="card-container" role="list">
+      <md-card
+        class="card"
+        role="listitem"
+        *ngFor="let message of messages; let idx = index"
+        [@flyInOut]="message.swipe"
+        (@flyInOut.done)="animationDone(idx, $event.toState)"
+        (swipeleft)="swipe(idx, $event.type)"
+        (swiperight)="swipe(idx, $event.type)">
+        <div class="card-header">
+          <img
+            md-card-avatar
+            src="{{imgUrl}}{{message.author.photoUrl}}"
+            alt="{{message.author.name}}">
+          <div class="card-title">
+            <md-card-title class="card-author-name">{{message.author.name}}</md-card-title>
+            <md-card-subtitle class="card-update-date">{{message.updated | amTimeAgo}}</md-card-subtitle>
+          </div>
+        </div>
+        <md-card-content id="message{{idx}}" class="card-content">
+          {{message.content}}
+        </md-card-content>
+      </md-card>
+    </div>
+  </main>
+</md-sidenav-container>

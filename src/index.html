@@ -2,13 +2,21 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>DsimsInfiniteScroll</title>
+  <title>DSims - Infinite Scroll</title>
   <base href="/">
 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<body>
-  <app-root>Loading...</app-root>
+<body dir="ltr">
+  <app-root>
+    <md-progress-spinner
+      class="loading"
+      role="progressbar"
+      aria-busy="true"
+      aria-valuetext="Loading...">
+  </app-root>
 </body>
 </html>
